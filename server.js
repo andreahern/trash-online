@@ -17,6 +17,11 @@ const {
   swap,
 } = require("./gameActions");
 const app = express();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build/"));
+}
+
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
@@ -24,10 +29,6 @@ app.use(cors());
 app.use(express.json());
 app.use(authRoutes);
 app.use(gameRoutes);
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build/"));
-}
 
 const MongoURI = process.env.MongoURI;
 const PORT = process.env.PORT || 8080;
