@@ -28,10 +28,10 @@ app.use(authRoutes);
 app.use(gameRoutes);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/build/")));
+  app.use(express.static(path.join(__dirname, "game/build/")));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build"));
+    res.sendFile(path.join(__dirname, "game", "build"));
   });
 }
 
