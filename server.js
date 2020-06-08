@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const gameRoutes = require("./routes/gameRoutes");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 const requireAuth = require("./middlewares/requireAuth");
 const {
