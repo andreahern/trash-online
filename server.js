@@ -23,13 +23,12 @@ const io = require("socket.io")(http);
 
 app.use(cors());
 app.use(express.json());
+app.use(authRoutes);
+app.use(gameRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build/"));
 }
-
-app.use(authRoutes);
-app.use(gameRoutes);
 
 const MongoURI = process.env.MongoURI;
 const PORT = process.env.PORT || 8080;
