@@ -18,15 +18,16 @@ const {
 } = require("./gameActions");
 const app = express();
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build/"));
-}
-
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
 app.use(cors());
 app.use(express.json());
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build/"));
+}
+
 app.use(authRoutes);
 app.use(gameRoutes);
 
