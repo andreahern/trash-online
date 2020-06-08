@@ -17,7 +17,7 @@ import EndRound from "./EndRound.js";
 import EndGame from "./EndGame.js";
 import io from "socket.io-client";
 import jwt_decode from "jwt-decode";
-const socket = io("http://localhost:3002");
+const socket = io("http://localhost:3001");
 
 class Table extends Component {
   constructor() {

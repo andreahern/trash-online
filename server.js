@@ -19,8 +19,8 @@ const {
 } = require("./gameActions");
 const app = express();
 
-const http = require("http").createServer(app);
-const io = require("socket.io")(http);
+const server = require("http").createServer(app);
+const io = require("socket.io").listen(server);
 
 app.use(cors());
 app.use(express.json());
@@ -117,6 +117,4 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => socket.removeAllListeners());
 });
 
-io.listen(3002);
-
-app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
+server.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));

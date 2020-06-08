@@ -2,7 +2,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:3002");
+const socket = io("http://localhost:3001");
 
 export const host = async (newGame) => {
   const { username } = jwt_decode(localStorage.token);
