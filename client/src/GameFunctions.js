@@ -88,3 +88,7 @@ export const scores = async (playerNumber, playerWon) => {
     }
   );
 };
+
+export const deleteGame = async (id) => {
+  await axios.delete("/deleteGame", id);
+};

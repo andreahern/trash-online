@@ -8,6 +8,7 @@ class HostGame extends Component {
     this.state = {
       gameName: "",
       password: "",
+      errors: null,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -39,6 +40,8 @@ class HostGame extends Component {
     host(newGame).then((res) => {
       if (!res.error) {
         this.props.history.push(`/table`);
+      } else {
+        this.setState({ errors: res.error });
       }
     });
   }
@@ -48,7 +51,12 @@ class HostGame extends Component {
         <div className="row mt-5">
           <div className="col-md-6 m-auto">
             <h1 className="fas fa-3x">Host Game</h1>
+
             <div className="card card-body">
+              {this.state.errors ? (
+                <p style={{ color: "red" }}>{this.state.errors}</p>
+              ) : null}
+
               <form noValidate onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <label htmlFor="name">Game Name</label>

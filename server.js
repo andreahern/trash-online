@@ -42,6 +42,7 @@ mongoose.connect(MongoURI, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 mongoose.connection.on("connected", () => {

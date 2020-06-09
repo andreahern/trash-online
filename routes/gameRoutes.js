@@ -22,8 +22,6 @@ router.put("/join", requireAuth, async (req, res) => {
       bcrypt.compareSync(req.body.password, game.password))
   ) {
     game.player2Name = req.body.guest;
-    game.player2Flipped = new Array(10).fill(0);
-    game.player2Num = -1;
     game.activePlayers++;
   } else {
     return res.send({ error: "Password is incorrect" });
@@ -47,11 +45,9 @@ router.post("/host", requireAuth, async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     game.password = await bcrypt.hash(game.password, salt);
   }
-  game.deck = Game.initializeDeck();
 
+  game.deck = Game.initializeDeck();
   game.player1Name = req.body.host;
-  game.player1Flipped = new Array(10).fill(0);
-  game.player1Num = 1;
   game.activePlayers++;
 
   await game.save();
@@ -65,6 +61,13 @@ router.post("/state", requireAuth, async (req, res) => {
   );
 
   res.send(game);
+});
+
+router.delete("/deleteGame", async (req, res) => {
+  Game.findByIdAndRemove(req.body.id, (err, data) => {
+    if (err) res.send("Game couldn't be deleted");
+    else res.send("Game was deleted");
+  });
 });
 
 module.exports = router;

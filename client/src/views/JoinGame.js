@@ -7,6 +7,7 @@ class JoinGame extends Component {
     super();
     this.state = {
       openGames: [],
+      error: null,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -36,6 +37,8 @@ class JoinGame extends Component {
     join(newUser).then((res) => {
       if (!res.error) {
         this.props.history.push(`/table`);
+      } else {
+        this.setState({ error: res.error });
       }
     });
   }
@@ -51,6 +54,9 @@ class JoinGame extends Component {
           <div className="col-md-6 m-auto">
             <h1 className="fas fa-3x">Join Game</h1>
             <div className="card card-body">
+              {this.state.error ? (
+                <p style={{ color: "red" }}>{this.state.error}</p>
+              ) : null}
               <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input

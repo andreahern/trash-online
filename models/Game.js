@@ -7,26 +7,9 @@ const gameSchema = new mongoose.Schema({
     unique: true,
   },
   password: { type: String },
-
   player1Name: { type: String },
-  player1Cards: [String],
-  player1Flipped: [String],
-  player1Size: { type: Number, default: 10 },
-  player1Num: { type: Number },
-
   player2Name: { type: String },
-  player2Cards: [String],
-  player2Flipped: [String],
-  player2Size: { type: Number, default: 10 },
-  player2Num: { type: Number },
-
-  currentPlayer: { type: Number, default: 1 },
   deck: [String],
-  trash: [String],
-  hand: { type: String, default: "" },
-  gameInSession: { type: Boolean, default: false },
-  playerPlaying: { type: Boolean, default: false },
-  playerWon: { type: Number, default: 0 },
   activePlayers: { type: Number, default: 0 },
   date: { type: Date, default: Date.now },
 });

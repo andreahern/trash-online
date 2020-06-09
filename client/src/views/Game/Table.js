@@ -9,6 +9,7 @@ import {
   getState,
   reset,
   scores,
+  deleteGame,
 } from "../../GameFunctions";
 import "../../App.css";
 import Card from "./Card";
@@ -74,12 +75,12 @@ class Table extends Component {
   };
 
   resetGame = () => {
-    if (this.state.currentPlayer !== this.state.playerNumber) return;
     reset(this.state.id, this.state);
   };
 
   return = () => {
     scores(this.state.playerNumber, this.state.playerWon);
+    deleteGame(this.state.id);
     this.props.history.push(`/profile`);
   };
 
@@ -195,12 +196,6 @@ class Table extends Component {
           >
             End Turn
           </button>
-          <button
-            onClick={() => this.resetGame()}
-            disabled={!this.state.gameInSession}
-          >
-            Reset
-          </button>
         </div>
         <div>
           {this.state.gameInSession ? (
@@ -227,9 +222,7 @@ class Table extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.activePlayers !== 2 ? this.waiting() : this.table()}
-      </div>
+      <>{this.state.activePlayers !== 2 ? this.waiting() : this.table()}</>
     );
   }
 }
